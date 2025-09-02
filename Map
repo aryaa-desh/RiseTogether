@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>National Impact Map</title>
+  <style>
+    #map {
+      height: 600px;
+      width: 100%;
+    }
+  </style>
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+</head>
+<body>
+  <h2>National Impact</h2>
+  <p>Rise Together participants come from all over the nation</p>
+  <div id="map"></div>
+
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <script>
+    const map = L.map('map').setView([37.8, -96], 4);
+
+    // Add OpenStreetMap tiles
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+
+    // College data with approximate coordinates
+    const colleges = [
+      { name: "Alabama A&M University", coords: [34.783, -86.568] },
+      { name: "Angelo State University", coords: [31.442, -100.461] },
+      { name: "Champlain College", coords: [44.4759, -73.1978] },
+      { name: "Columbia University", coords: [40.8075, -73.9626] },
+      { name: "Cornell University", coords: [42.4534, -76.4735] },
+      { name: "Franklin & Marshall College", coords: [40.047, -76.319] },
+      { name: "George Mason University", coords: [38.8309, -77.3074] },
+      { name: "George Washington University", coords: [38.8997, -77.0486] },
+      { name: "Grambling State University", coords: [32.5285, -92.7133] },
+      { name: "John Hopkins University", coords: [39.3299, -76.6205] },
+      { name: "Lafayette College", coords: [40.7006, -75.2107] },
+      { name: "Northern Virginia Community College", coords: [38.834, -77.236] },
+      { name: "Olin College of Engineering", coords: [42.2995, -71.2637] },
+      { name: "Pennsylvania State University", coords: [40.7982, -77.8599] },
+      { name: "San Diego Mesa College", coords: [32.8153, -117.1683] },
+      { name: "San Jose Community College", coords: [37.3037, -121.8610] },
+      { name: "Stanford University", coords: [37.4275, -122.1697] },
+      { name: "The School of the Art Institute of Chicago", coords: [41.8796, -87.6237] },
+      { name: "University of Louisiana at Monroe", coords: [32.5322, -92.0665] },
+      { name: "University of Massachusetts Amherst", coords: [42.3868, -72.5301] },
+      { name: "University of Texas at Arlington", coords: [32.729, -97.114] },
+      { name: "Washington and Lee University", coords: [37.7904, -79.4444] },
+      { name: "Xavier University", coords: [39.149, -84.474] }
+    ];
+
+    // Add markers
+    colleges.forEach(college => {
+      L.marker(college.coords).addTo(map).bindTooltip(college.name, {
+        permanent: false,
+        direction: 'top'
+      });
+    });
+  </script>
+</body>
+</html>
